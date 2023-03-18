@@ -6,4 +6,26 @@
   background: rgb(247, 243, 199);
   border: 2px solid blue;
   border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+html {
+  font-family: sans-serif;
+  margin: 20px;
+}
+
+body {
+  width: 50%;
+  max-width: 800px;
+  min-width: 480px;
+  margin: 0 auto;
+}
+
+.form input[type='number'] {
+  width: 200px;
+}
+
+.lastResult {
+  color: white;
+  padding: 3px;
 }
