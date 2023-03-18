@@ -12,6 +12,7 @@
 html {
   font-family: sans-serif;
   margin: 20px;
+  background: aliceblue;
 }
 
 body {
@@ -22,7 +23,7 @@ body {
 }
 
 .form input[type='number'] {
-  width: 200px;
+  width: 50px;
 }
 
 .lastResult {

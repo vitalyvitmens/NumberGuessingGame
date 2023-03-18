@@ -17,15 +17,15 @@ function checkGuess() {
   var userGuess = Number(guessField.value)
   // проверяем является ли это первой попыткой игрока или нет):
   if (guessCount === 1) {
-    // Если это так, мы выводим параграф с содержанием "Previous guesses:   Если нет, ничего не делаем.
-    guesses.textContent = 'Previous guesses: '
+    // Если это так, мы выводим параграф с содержанием "Ваши предположения:   Если нет, ничего не делаем.
+    guesses.textContent = 'Ваши предположения: '
   }
   // добавляет текущее значение userGuess в конец параграфа guesses и пустое пространство поэтому между каждыми показанными предположениями будет пробел.
   guesses.textContent += `${userGuess} `
   // Блок1: проверяет, совпадает ли предположение пользователя с randomNumber
   if (userGuess === randomNumber) {
     // Если это так, игрок правильно догадался, и игра выиграна, поэтому мы показываем игроку поздравительное сообщение с приятным зелёным цветом, очищаем содержимое окна информации о минимуме / максимуме и запускаем функцию, называемую setGameOver()
-    lastResult.textContent = 'Congratulations! You got it right!'
+    lastResult.textContent = 'Поздравляем! Вы угадали!'
     lastResult.style.backgroundColor = 'green'
     lowOrHi.textContent = ''
     setGameOver()
@@ -35,12 +35,12 @@ function checkGuess() {
     setGameOver()
     // Блок3:  запускается только в том случае, если ни один из двух других тестов не возвращает true (т.е. Игрок не догадался правильно, но у него ещё остались догадки). В этом случае мы говорим игроку, что он ошибся, затем мы выполняем ещё один условный тест, чтобы проверить, было ли предположение больше или меньше ответа, показывая дополнительное сообщение.
   } else {
-    lastResult.textContent = 'Wrong!'
+    lastResult.textContent = 'Неправильно!'
     lastResult.style.backgroundColor = 'red'
     if (userGuess < randomNumber) {
-      lowOrHi.textContent = 'Last guess was too low!'
+      lowOrHi.textContent = `${userGuess} меньше загаданного!`
     } else if (userGuess > randomNumber) {
-      lowOrHi.textContent = 'Last guess was too high!'
+      lowOrHi.textContent = `${userGuess} больше загаданного!`
     }
   }
   // Последние три строки в функции готовят нас к следующей попытке. Мы добавляем 1 к переменной guessCount так как игрок использовал свой ход (++ оператор инкремента — увеличивает на 1), очищаем значение текстового поля и фокусируемся на нем снова, готовы для ввода следующего ответа.
@@ -51,20 +51,13 @@ function checkGuess() {
 // добавляем обработчик событий к кнопке guessSubmit. Это метод, который принимает два входных значения (называемые аргументами) - тип события, которое мы обработаем (в данном случае click) в виде строки, и код, который мы хотим запустить при возникновении события (в данном случае функция checkGuess()
 guessSubmit.addEventListener('click', checkGuess)
 
-// Функция: создаёт новый параграф и добавляет его вниз тела HTML.
-function createParagraph() {
-  var para = document.createElement('p')
-  para.textContent = 'You clicked the button!'
-  document.body.appendChild(para)
-}
-
 function setGameOver() {
   // Первые две строки отключают ввод текста и кнопку формы, устанавливая их отключённые свойства как true. Это необходимо, потому что, если бы мы этого не сделали, пользователь мог бы представить больше догадок после завершения игры, что испортит ситуацию.
   guessField.disabled = true
   guessSubmit.disabled = true
-  // три строки генерируют новый элемент <button>, устанавливают его текстовую метку « Start new game» и добавляют её к нижней части нашего HTML.
+  // три строки генерируют новый элемент <button>, устанавливают его текстовую метку «Попробовать ещё раз» и добавляют её к нижней части нашего HTML.
   resetButton = document.createElement('button')
-  resetButton.textContent = 'Start new game'
+  resetButton.textContent = 'Попробовать ещё раз'
   document.body.appendChild(resetButton)
   // устанавливает обработчик событий на нашей новой кнопке, так что при нажатии на неё запускается функция resetGame().
   resetButton.addEventListener('click', resetGame)
@@ -87,7 +80,7 @@ function resetGame() {
   guessField.value = ''
   guessField.focus()
   // Удаляет цвет фона из абзаца lastResult.
-  lastResult.style.backgroundColor = 'white'
+  lastResult.style.backgroundColor = 'rgb(247, 243, 199)'
   // Создаёт новое случайное число, чтобы вы не угадывали одно и тоже!
   randomNumber = Math.floor(Math.random() * 100) + 1
 }
